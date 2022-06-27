@@ -1,5 +1,6 @@
 import utils.BasketballPageGenerator;
 import utils.FutsalPageGenerator;
+import utils.MainPageGenerator;
 import utils.TogetherPageGenerator;
 
 import javax.swing.*;
@@ -30,16 +31,22 @@ public class AreYouAlone {
     panel.setLayout(new FlowLayout());
     frame.add(panel, BorderLayout.PAGE_START);
 
+    panel.add(createLogo());
     panel.add(createMainButton());
     panel.add(createFutsalButton());
     panel.add(createBasketballButton());
     panel.add(createTogetherButton());
   }
 
+  public JLabel createLogo() {
+    return new JLabel("혼자왔니?");
+  }
+
   public JButton createMainButton() {
     JButton button = new JButton("메인");
     button.addActionListener(event -> {
-
+      JPanel mainPageGenerator = new MainPageGenerator();
+      showFutsalConetnt(mainPageGenerator);
     });
     return button;
   }
