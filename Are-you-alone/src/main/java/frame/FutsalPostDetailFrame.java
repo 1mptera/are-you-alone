@@ -22,14 +22,9 @@ public class FutsalPostDetailFrame extends JFrame {
     detailFrame.add(panel);
     panel.setLayout(null);
 
-
     panel.add(createContent());
     panel.add(createDeleteButton());
     panel.add(createModifyButton());
-//    detailFrame.add(content);
-
-//    content.setBounds(10,10,100,100);
-//    panel.add(content);
   }
 
   public JButton createModifyButton() {
