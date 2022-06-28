@@ -1,12 +1,18 @@
 package frame;
 
+import models.Writing;
+
 import javax.swing.*;
 
 public class FutsalPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
   private JPanel panel;
+  private JLabel postContent;
 
-  public FutsalPostDetailFrame() {
+  private Writing writing;
+
+  public FutsalPostDetailFrame(Writing writing) {
+    this.writing = writing;
 
     detailFrame = new JFrame("상세 페이지");
     detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,6 +33,16 @@ public class FutsalPostDetailFrame extends JFrame {
     panel.add(createModifyButton());
   }
 
+  public JLabel createContent() {
+    for(String post : writing.getPostContent()) {
+      postContent = new JLabel(post);
+      this.add(postContent);
+    }
+    postContent.setBounds(10,10,700,600);
+
+    return postContent;
+  }
+
   public JButton createModifyButton() {
     JButton modifyButton = new JButton("수정하기");
     modifyButton.setBounds(530,700,100,40);
@@ -43,12 +59,5 @@ public class FutsalPostDetailFrame extends JFrame {
       // 글 삭제
     });
     return deleteButton;
-  }
-
-  public JLabel createContent() {
-    JLabel label = new JLabel("6/26 17:00 메가테라 스타디움에서 풋살 5:5 같이 " +
-        "즐기실 분 010-xxxx-xxxx 연락부탁드립니다. ");
-    label.setBounds(10,10,700,600);
-    return label;
   }
 }

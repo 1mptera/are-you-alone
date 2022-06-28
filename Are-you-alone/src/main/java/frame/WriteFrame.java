@@ -39,6 +39,10 @@ public class WriteFrame extends JFrame {
     transmitButton.addActionListener(event -> {
       String title = titleBox.getText();
       writing.getWriting(title);
+
+      String content = contentBox.getText();
+      writing.getContent(content);
+
       frame.setVisible(false);
     });
 

@@ -1,12 +1,19 @@
 package frame;
 
+import models.Writing;
+
 import javax.swing.*;
 
 public class TogetherPostDetailFrame extends JFrame {
   private final JFrame frame;
   private JPanel panel;
+  private JLabel postContent;
 
-  public TogetherPostDetailFrame() {
+  private Writing writing;
+
+  public TogetherPostDetailFrame(Writing writing) {
+    this.writing = writing;
+
     frame = new JFrame("상세 페이지");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(800, 800);
@@ -17,6 +24,7 @@ public class TogetherPostDetailFrame extends JFrame {
   }
 
   public void loadContent() {
+
     panel = new JPanel();
     frame.add(panel);
     panel.setLayout(null);
@@ -24,6 +32,16 @@ public class TogetherPostDetailFrame extends JFrame {
     panel.add(createContent());
     panel.add(createDeleteButton());
     panel.add(createModifyButton());
+  }
+
+  public JLabel createContent() {
+    for(String post : writing.getPostContent()) {
+      postContent = new JLabel(post);
+      this.add(postContent);
+    }
+    postContent.setBounds(10,10,700,600);
+
+    return postContent;
   }
 
   public JButton createModifyButton() {
@@ -42,13 +60,5 @@ public class TogetherPostDetailFrame extends JFrame {
       // 글 삭제
     });
     return deleteButton;
-  }
-
-  public JLabel createContent() {
-    JLabel label = new JLabel("6/28 17:00 강북구 근처에서 테니스 같이 " +
-        "하실 분 계신가요? 못하셔도 상관 없습니다. 010-xxxx-xxxx 연락부탁드립니다. ");
-    label.setBounds(10,10,700,600);
-
-    return label;
   }
 }

@@ -23,13 +23,13 @@ public class TogetherPageGenerator extends JPanel {
   }
 
   private void writingList() {
-    for(String post : writing.getPosts()) {
+    for(String post : writing.getPostTitle()) {
       postTitle = new JLabel(post);
       this.add(postTitle);
 
       postTitle.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
-          JFrame togetherPostDetailFrame = new TogetherPostDetailFrame();
+          JFrame togetherPostDetailFrame = new TogetherPostDetailFrame(writing);
         }
       });
     }
