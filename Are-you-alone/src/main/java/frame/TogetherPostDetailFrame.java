@@ -21,7 +21,6 @@ public class TogetherPostDetailFrame extends JFrame {
     frame.add(panel);
     panel.setLayout(null);
 
-
     panel.add(createContent());
     panel.add(createDeleteButton());
     panel.add(createModifyButton());

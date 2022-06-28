@@ -1,14 +1,17 @@
 package frame;
 
+import models.Writing;
 import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
 
 public class WriteFrame extends JFrame {
   private final JFrame frame;
-  private FutsalWritingRepository futsalWritingRepository;
+  private Writing writing;
 
-  public WriteFrame() {
+  public WriteFrame(Writing writing) {
+    this.writing = writing;
+
     frame = new JFrame("Are you alone?");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(800, 800);
@@ -19,8 +22,6 @@ public class WriteFrame extends JFrame {
   }
 
   private void write() {
-    futsalWritingRepository = new FutsalWritingRepository();
-
     JPanel panel = new JPanel();
     frame.add(panel);
     panel.setLayout(null);
@@ -37,7 +38,7 @@ public class WriteFrame extends JFrame {
 
     transmitButton.addActionListener(event -> {
       String title = titleBox.getText();
-      futsalWritingRepository.getWriting(title);
+      writing.getWriting(title);
       frame.setVisible(false);
     });
 
