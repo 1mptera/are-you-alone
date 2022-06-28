@@ -1,5 +1,7 @@
 package utils;
 
+import frame.FutsalPostDetailFrame;
+import frame.WriteFrame;
 import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
@@ -9,8 +11,6 @@ import java.awt.event.MouseEvent;
 
 public class FutsalPageGenerator extends JPanel {
   private FutsalWritingRepository futsalWritingRepository;
-  private JFrame frame;
-
 
   public FutsalPageGenerator() {
     setLayout(new GridLayout(3, 1));
@@ -30,27 +30,16 @@ public class FutsalPageGenerator extends JPanel {
     this.add(test);
     test.addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
-        frame = new JFrame("상세 페이지");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 800);
-
-        loadContent();
-
-        frame.setVisible(true);
-      }
-
-      private void loadContent() {
-        JLabel content = new JLabel("6/26 17:00 메가테라 스타디움에서 풋살 5:5 같이 " +
-            "즐기실 분 010-xxxx-xxxx 연락부탁드립니다. ");
-        frame.add(content);
+        JFrame futsalPostdetailPage = new FutsalPostDetailFrame();
       }
     });
   }
 
-  private void writeButton() {
+  public void writeButton() {
     JButton writeButton = new JButton("글 쓰기");
     writeButton.addActionListener(event -> {
       JFrame writeFrame = new WriteFrame();
+      setVisible(false);
     });
 
     this.add(writeButton);

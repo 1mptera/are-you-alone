@@ -1,11 +1,19 @@
 package utils;
 
+import frame.BasketballPostDetailFrame;
+import frame.FutsalPostDetailFrame;
+import frame.WriteFrame;
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BasketballPageGenerator extends JPanel {
+  private JFrame frame;
+  private BasketballWritingRepository basketballWritingRepository;
+
   public BasketballPageGenerator() {
     setLayout(new GridLayout(3,1));
 
@@ -14,12 +22,16 @@ public class BasketballPageGenerator extends JPanel {
   }
 
   public void writingList() {
-    BasketballWritingRepository basketballWritingRepository =
-        new BasketballWritingRepository();
+    basketballWritingRepository = new BasketballWritingRepository();
 
-    String writing = basketballWritingRepository.getWriting();
-    JLabel label = new JLabel(writing);
-    this.add(label);
+    JLabel test = new JLabel("6/26 18:00 상암 농구장 팀원 모집"); // 글 제목 불러오기 필요
+    this.add(test);
+    test.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        JFrame basketballPostdetailPage = new BasketballPostDetailFrame();
+      }
+    });
+
   }
 
   public void writeButton() {
