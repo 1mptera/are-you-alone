@@ -1,4 +1,4 @@
-package utils;
+package frame;
 
 import repositories.FutsalWritingRepository;
 
@@ -38,6 +38,7 @@ public class WriteFrame extends JFrame {
     transmitButton.addActionListener(event -> {
       String title = titleBox.getText();
       futsalWritingRepository.getWriting(title);
+      frame.setVisible(false);
     });
 
     transmitButton.setBounds(650,700,100,40);
