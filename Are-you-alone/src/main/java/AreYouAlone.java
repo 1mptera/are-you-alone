@@ -1,3 +1,4 @@
+import repositories.FutsalWritingRepository;
 import utils.BasketballPageGenerator;
 import utils.FutsalPageGenerator;
 import utils.MainPageGenerator;
@@ -9,13 +10,17 @@ import java.awt.*;
 public class AreYouAlone {
   private JFrame frame;
   private JPanel contentPanel;
+  private FutsalWritingRepository futsalWritingRepository;
 
   public static void main(String[] args) {
     AreYouAlone application = new AreYouAlone();
+
     application.run();
   }
 
   public void run() {
+    futsalWritingRepository = new FutsalWritingRepository();
+
     frame = new JFrame("Are you alone?");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(800, 800);
