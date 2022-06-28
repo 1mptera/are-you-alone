@@ -5,14 +5,24 @@ import java.util.List;
 
 public class Writing {
 
-  private List<String> posts = new ArrayList<>();
+  private List<String> postTitle = new ArrayList<>();
+  private List<String> postContent = new ArrayList<>();
 
   public void getWriting(String title) {
-    posts.add(title);
+
+    postTitle.add(title);
   }
 
-  public List<String> getPosts() {
+  public List<String> getPostTitle() {
+    return postTitle;
+  }
 
-    return posts;
+  public void getContent(String content) {
+
+    postContent.add(content);
+  }
+
+  public List<String> getPostContent() {
+    return postContent;
   }
 }

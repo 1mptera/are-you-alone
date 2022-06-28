@@ -23,13 +23,13 @@ public class BasketballPageGenerator extends JPanel {
   }
 
   public void writingList() {
-    for(String post : writing.getPosts()) {
+    for(String post : writing.getPostTitle()) {
       postTitle = new JLabel(post);
       this.add(postTitle);
 
       postTitle.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
-          JFrame basketballPostDetailPage = new BasketballPostDetailFrame();
+          JFrame basketballPostDetailPage = new BasketballPostDetailFrame(writing);
         }
       });
     }
