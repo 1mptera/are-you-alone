@@ -1,10 +1,12 @@
 package utils;
 
+import repositories.FutsalWritingRepository;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class WriteFrame extends JFrame {
   private final JFrame frame;
+  private FutsalWritingRepository futsalWritingRepository;
 
   public WriteFrame() {
     frame = new JFrame("Are you alone?");
@@ -13,27 +15,31 @@ public class WriteFrame extends JFrame {
 
     write();
 
-
     frame.setVisible(true);
   }
 
   private void write() {
+    futsalWritingRepository = new FutsalWritingRepository();
+
     JPanel panel = new JPanel();
     frame.add(panel);
     panel.setLayout(null);
 
-    JTextField title = new JTextField(20);
-    title.setBounds(50,10, 700, 40);
-    panel.add(title);
+    JTextField titleBox = new JTextField(20);
+    titleBox.setBounds(50,10, 700, 40);
+    panel.add(titleBox);
 
-    JTextArea content = new JTextArea();
-    content.setBounds(50,60,700, 600);
-    panel.add(content);
+    JTextArea contentBox = new JTextArea();
+    contentBox.setBounds(50,60,700, 600);
+    panel.add(contentBox);
 
     JButton transmitButton = new JButton("글 작성하기");
-    transmitButton.addActionListener(event -> {
 
+    transmitButton.addActionListener(event -> {
+      String title = titleBox.getText();
+      futsalWritingRepository.getWriting(title);
     });
+
     transmitButton.setBounds(650,700,100,40);
     panel.add(transmitButton);
 

@@ -1,8 +1,17 @@
 package repositories;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FutsalWritingRepository {
 
-  public String getWriting() {
-     return "6/26 17:00 메가테라 스타디움 팀원 모집";
+  private List<String> titleLists = new ArrayList<>();
+
+  public void getWriting(String title) {
+     titleLists.add(title);
+  }
+
+  public List<String> getTitle() {
+    return titleLists;
   }
 }
