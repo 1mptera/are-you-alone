@@ -1,5 +1,7 @@
 import models.Writing;
+import repositories.BasketballWritingRepository;
 import repositories.FutsalWritingRepository;
+import repositories.TogetherWritingRepository;
 import utils.BasketballPageGenerator;
 import utils.FutsalPageGenerator;
 import utils.MainPageGenerator;
@@ -13,6 +15,9 @@ public class AreYouAlone {
   private JPanel contentPanel;
 
   private Writing writing;
+  private FutsalWritingRepository futsalWritingRepository;
+  private BasketballWritingRepository basketballWritingRepository;
+  private TogetherWritingRepository togetherWritingRepository;
 
   public static void main(String[] args) {
     AreYouAlone application = new AreYouAlone();
@@ -22,6 +27,9 @@ public class AreYouAlone {
 
   public void run() {
     writing = new Writing();
+    futsalWritingRepository = new FutsalWritingRepository();
+    basketballWritingRepository = new BasketballWritingRepository();
+    togetherWritingRepository = new TogetherWritingRepository();
 
     frame = new JFrame("Are you alone?");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +69,8 @@ public class AreYouAlone {
   public JButton createFutsalButton() {
     JButton button = new JButton("풋살 매치");
     button.addActionListener(event -> {
-      JPanel futsalPageGenerator = new FutsalPageGenerator(writing);
+      JPanel futsalPageGenerator =
+          new FutsalPageGenerator(futsalWritingRepository);
       showFutsalConetnt(futsalPageGenerator);
     });
     return button;
@@ -70,8 +79,10 @@ public class AreYouAlone {
   public JButton createBasketballButton() {
     JButton button = new JButton("농구 매치");
     button.addActionListener(event -> {
-      JPanel basketballPageGenerator = new BasketballPageGenerator(writing);
+      JPanel basketballPageGenerator =
+          new BasketballPageGenerator(basketballWritingRepository);
       showFutsalConetnt(basketballPageGenerator);
+
     });
     return button;
   }
@@ -79,7 +90,7 @@ public class AreYouAlone {
   public JButton createTogetherButton() {
     JButton button = new JButton("함께 해요");
     button.addActionListener(event -> {
-      JPanel togetherPageGenerator = new TogetherPageGenerator(writing);
+      JPanel togetherPageGenerator = new TogetherPageGenerator(togetherWritingRepository);
       showFutsalConetnt(togetherPageGenerator);
     });
     return button;
