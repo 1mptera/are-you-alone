@@ -1,17 +1,14 @@
 package frame;
 
-import models.Writing;
 import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
 
 public class FutsalWriteFrame extends JFrame {
   private final JFrame frame;
-  private Writing writing;
   private FutsalWritingRepository futsalWritingRepository;
 
   public FutsalWriteFrame(FutsalWritingRepository futsalWritingRepository) {
-    this.writing = writing;
     this.futsalWritingRepository = futsalWritingRepository;
 
     frame = new JFrame("Are you alone?");

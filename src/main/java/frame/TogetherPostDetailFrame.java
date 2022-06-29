@@ -42,6 +42,12 @@ public class TogetherPostDetailFrame extends JFrame {
 //      postContent = new JLabel(post);
 //      this.add(postContent);
 //    }
+    String title = togetherWritingRepository.getTogetherTitleKey();
+    String post = String.valueOf
+        (togetherWritingRepository.getTogetherPostContent(title));
+    postContent = new JLabel(post);
+    this.add(postContent);
+
     postContent.setBounds(10,10,700,600);
 
     return postContent;
@@ -52,6 +58,9 @@ public class TogetherPostDetailFrame extends JFrame {
     modifyButton.setBounds(530,700,100,40);
     modifyButton.addActionListener(event -> {
       // 글 수정
+      JFrame futsalWriteFrame =
+          new TogetherWriteFrame(togetherWritingRepository);
+      detailFrame.setVisible(false);
     });
     return modifyButton;
   }
@@ -61,10 +70,10 @@ public class TogetherPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
-//      String title = writing.getTitleKey();
-//      writing.deleteWriting(title);
-//
-//      detailFrame.setVisible(false);
+      String title = togetherWritingRepository.getTogetherTitleKey();
+      togetherWritingRepository.deleteTogetherWriting(title);
+
+      detailFrame.setVisible(false);
     });
     return deleteButton;
   }
