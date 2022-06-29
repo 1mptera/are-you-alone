@@ -39,9 +39,9 @@ public class BasketballWriteFrame extends JFrame {
     JButton transmitButton = new JButton("글 작성하기");
 
     transmitButton.addActionListener(event -> {
-      String futsalTitle = titleBox.getText();
-      String futsalContent = contentBox.getText();
-      basketballWritingRepository.getBasketballWriting(futsalTitle, futsalContent);
+      String basketballTitle = titleBox.getText();
+      String basketballContent = contentBox.getText();
+      basketballWritingRepository.getBasketballWriting(basketballTitle, basketballContent);
 
       frame.setVisible(false);
     });

@@ -1,9 +1,11 @@
 package utils;
 
+import frame.FutsalPostDetailFrame;
+import frame.FutsalWriteFrame;
 import frame.TogetherPostDetailFrame;
 import frame.TogetherWriteFrame;
-import frame.WriteFrame;
 import models.Writing;
+import repositories.FutsalWritingRepository;
 import repositories.TogetherWritingRepository;
 
 import javax.swing.*;
@@ -12,6 +14,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TogetherPageGenerator extends JPanel {
+  private final JButton writeButton;
+  private final JButton listCheck;
+  private final JPanel listPanel;
   private Writing writing;
   private TogetherWritingRepository togetherWritingRepository;
 
@@ -21,32 +26,46 @@ public class TogetherPageGenerator extends JPanel {
     this.writing = writing;
     this.togetherWritingRepository = togetherWritingRepository;
 
-    setLayout(new GridLayout(3,1));
+    writeButton = new JButton("글 쓰기");
+    writingPost(togetherWritingRepository, writeButton);
 
-    writingList();
-    writeButton();
+    listCheck = new JButton("목록 보기");
+    listPanel = new JPanel();
+
+    listCheck(togetherWritingRepository, listPanel);
+    this.add(listCheck);
+    this.add(listPanel);
+
   }
+  public void listCheck(TogetherWritingRepository togetherWritingRepository
+      , JPanel listPanel) {
+    listCheck.addActionListener(event -> {
+      listPanel.removeAll();
 
-  private void writingList() {
-    for(String post : togetherWritingRepository.getTogetherPostTitle()) {
-      postTitle = new JLabel(post);
-      this.add(postTitle);
+      for (String post : togetherWritingRepository.getTogetherPostTitle()) {
+        postTitle = new JLabel(post);
 
-      postTitle.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent e) {
-          JFrame togetherPostDetailFrame = new TogetherPostDetailFrame(togetherWritingRepository);
-        }
-      });
-    }
-  }
+        postTitle.addMouseListener(new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            JFrame togetherPostDetailFrame =
+                new TogetherPostDetailFrame(togetherWritingRepository);
+          }
+        });
 
-  private void writeButton() {
-    JButton writeButton = new JButton("글 쓰기");
-    writeButton.addActionListener(event -> {
-      JFrame togetherWriteFrame = new TogetherWriteFrame(togetherWritingRepository);
-      setVisible(false);
+        listPanel.add(postTitle);
+      }
+
+      listPanel.setVisible(false);
+      listPanel.setVisible(true);
     });
+  }
 
+  public void writingPost(TogetherWritingRepository togetherWritingRepository, JButton writeButton) {
+    writeButton.addActionListener(event -> {
+      JFrame togetherWriteFrame =
+          new TogetherWriteFrame(togetherWritingRepository);
+    });
     this.add(writeButton);
   }
+
 }

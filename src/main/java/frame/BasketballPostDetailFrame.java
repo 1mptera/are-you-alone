@@ -4,7 +4,6 @@ import models.Writing;
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class BasketballPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
@@ -57,6 +56,9 @@ public class BasketballPostDetailFrame extends JFrame {
     modifyButton.setBounds(530,700,100,40);
     modifyButton.addActionListener(event -> {
       // 글 수정
+      JFrame basketballWriteFrame =
+          new BasketballWriteFrame(basketballWritingRepository);
+      detailFrame.setVisible(false);
     });
     return modifyButton;
   }
@@ -66,10 +68,10 @@ public class BasketballPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
-//      String title = writing.getTitleKey();
-//      writing.deleteWriting(title);
+      String title = basketballWritingRepository.getBasketballTitleKey();
+      basketballWritingRepository.deleteBasketballWriting(title);
 //
-//      detailFrame.setVisible(false);
+      detailFrame.setVisible(false);
     });
     return deleteButton;
   }
