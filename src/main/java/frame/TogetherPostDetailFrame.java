@@ -1,32 +1,35 @@
 package frame;
 
 import models.Writing;
+import repositories.TogetherWritingRepository;
 
 import javax.swing.*;
 
 public class TogetherPostDetailFrame extends JFrame {
-  private final JFrame frame;
+  private final JFrame detailFrame;
   private JPanel panel;
   private JLabel postContent;
 
   private Writing writing;
+  private TogetherWritingRepository togetherWritingRepository;
 
-  public TogetherPostDetailFrame(Writing writing) {
+  public TogetherPostDetailFrame(TogetherWritingRepository togetherWritingRepository) {
     this.writing = writing;
+    this.togetherWritingRepository = togetherWritingRepository;
 
-    frame = new JFrame("상세 페이지");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setSize(800, 800);
+    detailFrame = new JFrame("상세 페이지");
+    detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    detailFrame.setSize(800, 800);
 
     loadContent();
 
-    frame.setVisible(true);
+    detailFrame.setVisible(true);
   }
 
   public void loadContent() {
 
     panel = new JPanel();
-    frame.add(panel);
+    detailFrame.add(panel);
     panel.setLayout(null);
 
     panel.add(createContent());
@@ -35,10 +38,10 @@ public class TogetherPostDetailFrame extends JFrame {
   }
 
   public JLabel createContent() {
-    for(String post : writing.getPostContent()) {
-      postContent = new JLabel(post);
-      this.add(postContent);
-    }
+//    for(String post : writing.getPostContent()) {
+//      postContent = new JLabel(post);
+//      this.add(postContent);
+//    }
     postContent.setBounds(10,10,700,600);
 
     return postContent;
@@ -58,6 +61,10 @@ public class TogetherPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
+//      String title = writing.getTitleKey();
+//      writing.deleteWriting(title);
+//
+//      detailFrame.setVisible(false);
     });
     return deleteButton;
   }

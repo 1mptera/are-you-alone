@@ -5,12 +5,14 @@ import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
 
-public class WriteFrame extends JFrame {
+public class FutsalWriteFrame extends JFrame {
   private final JFrame frame;
   private Writing writing;
+  private FutsalWritingRepository futsalWritingRepository;
 
-  public WriteFrame(Writing writing) {
+  public FutsalWriteFrame(FutsalWritingRepository futsalWritingRepository) {
     this.writing = writing;
+    this.futsalWritingRepository = futsalWritingRepository;
 
     frame = new JFrame("Are you alone?");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,11 +39,9 @@ public class WriteFrame extends JFrame {
     JButton transmitButton = new JButton("글 작성하기");
 
     transmitButton.addActionListener(event -> {
-      String title = titleBox.getText();
-      writing.getWriting(title);
-
-      String content = contentBox.getText();
-      writing.getContent(content);
+      String futsalTitle = titleBox.getText();
+      String futsalContent = contentBox.getText();
+      futsalWritingRepository.getFutsalWriting(futsalTitle, futsalContent);
 
       frame.setVisible(false);
     });
