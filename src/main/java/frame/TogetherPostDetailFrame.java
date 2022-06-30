@@ -9,9 +9,10 @@ public class TogetherPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
   private final String post;
   private JPanel panel;
-  private JLabel postContent;
+  private JLabel postContentLabel;
 
   private TogetherWritingRepository togetherWritingRepository;
+  private String postContent;
 
   public TogetherPostDetailFrame
       (TogetherWritingRepository togetherWritingRepository, String post) {
@@ -28,7 +29,6 @@ public class TogetherPostDetailFrame extends JFrame {
   }
 
   public void loadContent() {
-
     panel = new JPanel();
     detailFrame.add(panel);
     panel.setLayout(null);
@@ -40,15 +40,15 @@ public class TogetherPostDetailFrame extends JFrame {
 
   public JLabel createContent() {
     String title = togetherWritingRepository.getTogetherTitleKey(post);
-    String post = String.valueOf
+    postContent = String.valueOf
         (togetherWritingRepository.getTogetherPostContent(title));
-    postContent = new JLabel(post);
+    postContentLabel = new JLabel(postContent);
 
-    this.add(postContent);
+    this.add(postContentLabel);
 
-    postContent.setBounds(10,10,700,600);
+    postContentLabel.setBounds(10,10,700,600);
 
-    return postContent;
+    return postContentLabel;
   }
 
   public JButton createModifyButton() {
@@ -56,11 +56,49 @@ public class TogetherPostDetailFrame extends JFrame {
     modifyButton.setBounds(530,700,100,40);
     modifyButton.addActionListener(event -> {
       // 글 수정
-      JFrame futsalWriteFrame =
-          new TogetherWriteFrame(togetherWritingRepository);
-      detailFrame.setVisible(false);
+      panel.removeAll();
+
+      JButton internalModifiyButton = new JButton("수정하기");
+      internalModifiyButton.setBounds(650,700,100,40);
+      panel.add(internalModifiyButton);
+
+      JTextField titleBox = new JTextField(20);
+      titleBox.setText(post);
+      titleBox.setBounds(50,10, 700, 40);
+      panel.add(titleBox);
+
+      JTextArea contentBox = new JTextArea();
+      contentBox.setText(postContent);
+      contentBox.setBounds(50,60,700, 600);
+      panel.add(contentBox);
+
+      panel.setVisible(false);
+      panel.setVisible(true);
+
+      modify(internalModifiyButton, titleBox);
     });
     return modifyButton;
+  }
+
+  public void modify(JButton internalModifiyButton, JTextField titleBox) {
+    internalModifiyButton.addActionListener(event1 -> {
+
+      // 글 수정 입력 받기
+      String modifiedPostTitle = titleBox.getText();
+      String modifiedPostContent = titleBox.getText();
+
+      togetherWritingRepository.getTogetherWriting(modifiedPostTitle,
+          modifiedPostContent);
+
+      // 입력 받은 제목과 내용을 저장소에서 기존 값과 변경하기
+      togetherWritingRepository.changeTogetherWriting(post, modifiedPostTitle,
+          modifiedPostContent);
+
+      // 기존 제목은 저장소에서 삭제
+      togetherWritingRepository.deleteTogetherWriting(post);
+
+      detailFrame.setVisible(false);
+    });
   }
 
   public JButton createDeleteButton() {

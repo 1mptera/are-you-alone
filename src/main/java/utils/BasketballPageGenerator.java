@@ -76,7 +76,8 @@ public class BasketballPageGenerator extends JPanel {
       listPanel.setVisible(true);
     });
   }
-  public void writingPost(BasketballWritingRepository basketballWritingRepository, JButton writeButton) {
+  public void writingPost(BasketballWritingRepository basketballWritingRepository,
+                          JButton writeButton) {
     writeButton.addActionListener(event -> {
       JFrame basketballWriteFrame =
           new BasketballWriteFrame(basketballWritingRepository);
