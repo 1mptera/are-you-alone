@@ -1,20 +1,21 @@
 package frame;
 
-import models.Writing;
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;
 
 public class BasketballPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
+  private final String post;
   private JPanel panel;
   private JLabel postContent;
 
-  private Writing writing;
   private BasketballWritingRepository basketballWritingRepository;
 
-  public BasketballPostDetailFrame(BasketballWritingRepository basketballWritingRepository) {
+  public BasketballPostDetailFrame
+      (BasketballWritingRepository basketballWritingRepository, String post) {
     this.basketballWritingRepository = basketballWritingRepository;
+    this.post = post;
 
     detailFrame = new JFrame("상세 페이지");
     detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -36,13 +37,9 @@ public class BasketballPostDetailFrame extends JFrame {
   }
 
   public JLabel createContent() {
-//    for(String post : writing.getPostContent(t)) {
-//      postContent = new JLabel(post);
-//      this.add(postContent);
-//    }
-
-    String title = basketballWritingRepository.getBasketballTitleKey();
-    String post = String.valueOf(basketballWritingRepository.getBasketballPostContent(title));
+    String title = basketballWritingRepository.getBasketballTitleKey(post);
+    String post = String.valueOf
+        (basketballWritingRepository.getBasketballPostContent(title));
     postContent = new JLabel(post);
     this.add(postContent);
 
@@ -68,9 +65,9 @@ public class BasketballPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
-      String title = basketballWritingRepository.getBasketballTitleKey();
+      String title = basketballWritingRepository.getBasketballTitleKey(post);
       basketballWritingRepository.deleteBasketballWriting(title);
-//
+
       detailFrame.setVisible(false);
     });
     return deleteButton;

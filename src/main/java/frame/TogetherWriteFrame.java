@@ -1,6 +1,5 @@
 package frame;
 
-import models.Writing;
 import repositories.FutsalWritingRepository;
 import repositories.TogetherWritingRepository;
 
@@ -8,11 +7,9 @@ import javax.swing.*;
 
 public class TogetherWriteFrame extends JFrame {
   private final JFrame frame;
-  private Writing writing;
   private TogetherWritingRepository togetherWritingRepository;
 
   public TogetherWriteFrame(TogetherWritingRepository togetherWritingRepository) {
-    this.writing = writing;
     this.togetherWritingRepository = togetherWritingRepository;
 
     frame = new JFrame("Are you alone?");

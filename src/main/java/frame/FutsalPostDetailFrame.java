@@ -1,21 +1,21 @@
 package frame;
 
-import models.Writing;
 import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
 
 public class FutsalPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
+  private final String post;
   private JPanel panel;
   private JLabel postContent;
 
-  private Writing writing;
   private FutsalWritingRepository futsalWritingRepository;
 
   public FutsalPostDetailFrame
-      (FutsalWritingRepository futsalWritingRepository) {
+      (FutsalWritingRepository futsalWritingRepository, String post) {
     this.futsalWritingRepository = futsalWritingRepository;
+    this.post = post;
 
     detailFrame = new JFrame("상세 페이지");
     detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,17 +37,12 @@ public class FutsalPostDetailFrame extends JFrame {
   }
 
   public JLabel createContent() {
-    this.removeAll();
-    String title = futsalWritingRepository.getFutsalTitleKey();
+    String title = futsalWritingRepository.getFutsalTitleKey(post);
     String post = String.valueOf
         (futsalWritingRepository.getFutsalPostContent(title));
     postContent = new JLabel(post);
-    this.add(postContent);
 
-//    for(String post : writing.getPostContent()) {
-//      postContent = new JLabel(post);
-//      this.add(postContent);
-//    }
+    this.add(postContent);
 
     postContent.setBounds(10,10,700,600);
 
@@ -71,7 +66,7 @@ public class FutsalPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
-      String title = futsalWritingRepository.getFutsalTitleKey();
+      String title = futsalWritingRepository.getFutsalTitleKey(post);
       futsalWritingRepository.deleteFutsalWriting(title);
 
       detailFrame.setVisible(false);

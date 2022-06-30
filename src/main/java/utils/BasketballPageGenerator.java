@@ -2,9 +2,6 @@ package utils;
 
 import frame.BasketballPostDetailFrame;
 import frame.BasketballWriteFrame;
-import frame.FutsalPostDetailFrame;
-import frame.FutsalWriteFrame;
-import models.Writing;
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;
@@ -15,7 +12,7 @@ public class BasketballPageGenerator extends JPanel {
   private final JButton writeButton;
   private final JPanel listPanel;
   private final JButton listCheck;
-  private Writing writing;
+  private final JButton refreshButton;
   private BasketballWritingRepository basketballWritingRepository;
 
   private JLabel postTitle;
@@ -32,8 +29,29 @@ public class BasketballPageGenerator extends JPanel {
     listPanel = new JPanel();
 
     listCheck(basketballWritingRepository, listPanel);
+
+    refreshButton = new JButton("새로 고침");
+    refresh(basketballWritingRepository, listPanel);
+
     this.add(listCheck);
+    this.add(refreshButton);
     this.add(listPanel);
+  }
+
+  public void refresh(BasketballWritingRepository basketballWritingRepository,
+                       JPanel listPanel) {
+    refreshButton.addActionListener(event -> {
+      listPanel.removeAll();
+
+      for(String post : basketballWritingRepository.getBasketballPostTitle()) {
+        postTitle = new JLabel(post);
+        listPanel.add(postTitle);
+
+      }
+
+      listPanel.setVisible(false);
+      listPanel.setVisible(true);
+    });
   }
 
   public void listCheck(BasketballWritingRepository basketballWritingRepository
@@ -47,7 +65,7 @@ public class BasketballPageGenerator extends JPanel {
         postTitle.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
             JFrame basketballPostDetailFrame =
-                new BasketballPostDetailFrame(basketballWritingRepository);
+                new BasketballPostDetailFrame(basketballWritingRepository, post);
           }
         });
 

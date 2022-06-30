@@ -1,4 +1,3 @@
-import models.Writing;
 import repositories.BasketballWritingRepository;
 import repositories.FutsalWritingRepository;
 import repositories.TogetherWritingRepository;
@@ -14,7 +13,6 @@ public class AreYouAlone {
   private JFrame frame;
   private JPanel contentPanel;
 
-  private Writing writing;
   private FutsalWritingRepository futsalWritingRepository;
   private BasketballWritingRepository basketballWritingRepository;
   private TogetherWritingRepository togetherWritingRepository;
@@ -26,7 +24,6 @@ public class AreYouAlone {
   }
 
   public void run() {
-    writing = new Writing();
     futsalWritingRepository = new FutsalWritingRepository();
     basketballWritingRepository = new BasketballWritingRepository();
     togetherWritingRepository = new TogetherWritingRepository();
@@ -60,7 +57,7 @@ public class AreYouAlone {
   public JButton createMainButton() {
     JButton button = new JButton("메인");
     button.addActionListener(event -> {
-      JPanel mainPageGenerator = new MainPageGenerator(writing);
+      JPanel mainPageGenerator = new MainPageGenerator();
       showFutsalConetnt(mainPageGenerator);
     });
     return button;
