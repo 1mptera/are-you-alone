@@ -1,21 +1,22 @@
 package frame;
 
-import models.Writing;
+
 import repositories.TogetherWritingRepository;
 
 import javax.swing.*;
 
 public class TogetherPostDetailFrame extends JFrame {
   private final JFrame detailFrame;
+  private final String post;
   private JPanel panel;
   private JLabel postContent;
 
-  private Writing writing;
   private TogetherWritingRepository togetherWritingRepository;
 
-  public TogetherPostDetailFrame(TogetherWritingRepository togetherWritingRepository) {
-    this.writing = writing;
+  public TogetherPostDetailFrame
+      (TogetherWritingRepository togetherWritingRepository, String post) {
     this.togetherWritingRepository = togetherWritingRepository;
+    this.post = post;
 
     detailFrame = new JFrame("상세 페이지");
     detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -38,14 +39,11 @@ public class TogetherPostDetailFrame extends JFrame {
   }
 
   public JLabel createContent() {
-//    for(String post : writing.getPostContent()) {
-//      postContent = new JLabel(post);
-//      this.add(postContent);
-//    }
-    String title = togetherWritingRepository.getTogetherTitleKey();
+    String title = togetherWritingRepository.getTogetherTitleKey(post);
     String post = String.valueOf
         (togetherWritingRepository.getTogetherPostContent(title));
     postContent = new JLabel(post);
+
     this.add(postContent);
 
     postContent.setBounds(10,10,700,600);
@@ -70,7 +68,7 @@ public class TogetherPostDetailFrame extends JFrame {
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
       // 글 삭제
-      String title = togetherWritingRepository.getTogetherTitleKey();
+      String title = togetherWritingRepository.getTogetherTitleKey(post);
       togetherWritingRepository.deleteTogetherWriting(title);
 
       detailFrame.setVisible(false);

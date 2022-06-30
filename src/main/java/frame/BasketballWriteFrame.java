@@ -1,17 +1,15 @@
 package frame;
 
-import models.Writing;
+
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;
 
 public class BasketballWriteFrame extends JFrame {
   private final JFrame frame;
-  private Writing writing;
   private BasketballWritingRepository basketballWritingRepository;
 
   public BasketballWriteFrame(BasketballWritingRepository basketballWritingRepository) {
-    this.writing = writing;
     this.basketballWritingRepository = basketballWritingRepository;
 
     frame = new JFrame("Are you alone?");

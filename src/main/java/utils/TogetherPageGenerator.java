@@ -1,15 +1,10 @@
 package utils;
 
-import frame.FutsalPostDetailFrame;
-import frame.FutsalWriteFrame;
 import frame.TogetherPostDetailFrame;
 import frame.TogetherWriteFrame;
-import models.Writing;
-import repositories.FutsalWritingRepository;
 import repositories.TogetherWritingRepository;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,13 +12,13 @@ public class TogetherPageGenerator extends JPanel {
   private final JButton writeButton;
   private final JButton listCheck;
   private final JPanel listPanel;
-  private Writing writing;
+  private final JButton refreshButton;
   private TogetherWritingRepository togetherWritingRepository;
 
   private JLabel postTitle;
 
-  public TogetherPageGenerator(TogetherWritingRepository togetherWritingRepository) {
-    this.writing = writing;
+  public TogetherPageGenerator
+      (TogetherWritingRepository togetherWritingRepository) {
     this.togetherWritingRepository = togetherWritingRepository;
 
     writeButton = new JButton("글 쓰기");
@@ -33,10 +28,31 @@ public class TogetherPageGenerator extends JPanel {
     listPanel = new JPanel();
 
     listCheck(togetherWritingRepository, listPanel);
-    this.add(listCheck);
-    this.add(listPanel);
 
+    refreshButton = new JButton("새로 고침");
+    refresh(togetherWritingRepository, listPanel);
+
+    this.add(listCheck);
+    this.add(refreshButton);
+    this.add(listPanel);
   }
+
+  public void refresh(TogetherWritingRepository togetherWritingRepository,
+                      JPanel listPanel) {
+    refreshButton.addActionListener(event -> {
+      listPanel.removeAll();
+
+      for(String post : togetherWritingRepository.getTogetherPostTitle()) {
+        postTitle = new JLabel(post);
+        listPanel.add(postTitle);
+
+      }
+
+      listPanel.setVisible(false);
+      listPanel.setVisible(true);
+    });
+  }
+
   public void listCheck(TogetherWritingRepository togetherWritingRepository
       , JPanel listPanel) {
     listCheck.addActionListener(event -> {
@@ -48,7 +64,7 @@ public class TogetherPageGenerator extends JPanel {
         postTitle.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
             JFrame togetherPostDetailFrame =
-                new TogetherPostDetailFrame(togetherWritingRepository);
+                new TogetherPostDetailFrame(togetherWritingRepository, post);
           }
         });
 
