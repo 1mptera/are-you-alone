@@ -76,7 +76,8 @@ public class TogetherPageGenerator extends JPanel {
     });
   }
 
-  public void writingPost(TogetherWritingRepository togetherWritingRepository, JButton writeButton) {
+  public void writingPost(TogetherWritingRepository togetherWritingRepository,
+                          JButton writeButton) {
     writeButton.addActionListener(event -> {
       JFrame togetherWriteFrame =
           new TogetherWriteFrame(togetherWritingRepository);

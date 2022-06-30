@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class TogetherWritingRepository {
-  private List<String> togetherTitleKey = new ArrayList<>();
   private Map<String, String> togetherTitleAndContent = new HashMap<>();
   private List<String> togetherPostTitle = new ArrayList<>();
   private String togetherPostContent;
   private String post;
 
   public void getTogetherWriting(String togetherTitle, String togetherContent) {
-    togetherTitleKey.add(togetherTitle);
-
     togetherTitleAndContent.put(togetherTitle, togetherContent);
 
     togetherPostTitle.add(String.valueOf(togetherTitleAndContent
@@ -27,9 +24,8 @@ public class TogetherWritingRepository {
     return post;
   }
 
-  public void deleteTogetherWriting(String title) {
-    togetherTitleAndContent.remove(title);
-    togetherPostTitle.remove(title);
+  public List<String> getTogetherPostTitle() {
+    return togetherPostTitle;
   }
 
   public String getTogetherPostContent(String title) {
@@ -37,7 +33,16 @@ public class TogetherWritingRepository {
     return togetherPostContent;
   }
 
-  public List<String> getTogetherPostTitle() {
-    return togetherPostTitle;
+  public void deleteTogetherWriting(String title) {
+    togetherTitleAndContent.remove(title);
+    togetherPostTitle.remove(title);
+  }
+
+  public void changeTogetherWriting(String post,
+                                    String modifiedTitle,
+                                    String modifiedContent) {
+    togetherPostTitle.set(togetherPostTitle.indexOf(post),modifiedTitle);
+    togetherPostTitle.remove(modifiedTitle);
+    togetherTitleAndContent.replace(post, modifiedContent);
   }
 }

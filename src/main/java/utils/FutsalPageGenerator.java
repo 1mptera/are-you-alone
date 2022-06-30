@@ -14,6 +14,7 @@ public class FutsalPageGenerator extends JPanel {
   private final JButton listCheck;
   private final JButton refreshButton;
   private final JPanel listPanel;
+//  private final JComboBox levelBox;
   private FutsalWritingRepository futsalWritingRepository;
 
   private JLabel postTitle;
@@ -32,25 +33,16 @@ public class FutsalPageGenerator extends JPanel {
     refreshButton = new JButton("새로 고침");
     refresh(futsalWritingRepository, listPanel);
 
+    // level 박스
+//    levelBox = new JComboBox<>();
+//    levelBox.setModel(new DefaultComboBoxModel(new String[] {"Level1",
+//    "Level2", "Level3"}));
+
+
     this.add(listCheck);
     this.add(refreshButton);
     this.add(listPanel);
-  }
-
-  public void refresh(FutsalWritingRepository futsalWritingRepository,
-                       JPanel listPanel) {
-    refreshButton.addActionListener(event -> {
-      listPanel.removeAll();
-
-      for(String post : futsalWritingRepository.getFutsalPostTitle()) {
-        postTitle = new JLabel(post);
-        listPanel.add(postTitle);
-
-      }
-
-      listPanel.setVisible(false);
-      listPanel.setVisible(true);
-    });
+//    this.add(levelBox);
   }
 
   public void listCheck(FutsalWritingRepository futsalWritingRepository
@@ -76,8 +68,24 @@ public class FutsalPageGenerator extends JPanel {
     });
   }
 
+  public void refresh(FutsalWritingRepository futsalWritingRepository,
+                       JPanel listPanel) {
+    refreshButton.addActionListener(event -> {
+      listPanel.removeAll();
 
-  public void writingPost(FutsalWritingRepository futsalWritingRepository, JButton writeButton) {
+      for(String post : futsalWritingRepository.getFutsalPostTitle()) {
+        postTitle = new JLabel(post);
+        listPanel.add(postTitle);
+      }
+
+      listPanel.setVisible(false);
+      listPanel.setVisible(true);
+    });
+  }
+
+
+  public void writingPost(FutsalWritingRepository futsalWritingRepository,
+                          JButton writeButton) {
     writeButton.addActionListener(event -> {
       JFrame futsalWriteFrame =
           new FutsalWriteFrame(futsalWritingRepository);

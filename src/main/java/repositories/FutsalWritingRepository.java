@@ -3,15 +3,12 @@ package repositories;
 import java.util.*;
 
 public class FutsalWritingRepository {
-  private List<String> futsalTitleKey = new ArrayList<>();
   private Map<String, String> futsalTitleAndContent = new LinkedHashMap<>();
   private List<String> futsalPostTitle = new ArrayList<>();
   private String futsalPostContent;
   private String post;
 
   public void getFutsalWriting(String futsalTitle, String futsalContent) {
-    futsalTitleKey.add(futsalTitle);
-
     futsalTitleAndContent.put(futsalTitle, futsalContent);
 
     futsalPostTitle.add(String.valueOf(futsalTitleAndContent
@@ -24,9 +21,8 @@ public class FutsalWritingRepository {
     return post;
   }
 
-  public void deleteFutsalWriting(String title) {
-    futsalTitleAndContent.remove(title);
-    futsalPostTitle.remove(title);
+  public List<String> getFutsalPostTitle() {
+    return futsalPostTitle;
   }
 
   public String getFutsalPostContent(String title) {
@@ -34,7 +30,16 @@ public class FutsalWritingRepository {
     return futsalPostContent;
   }
 
-  public List<String> getFutsalPostTitle() {
-    return futsalPostTitle;
+  public void deleteFutsalWriting(String title) {
+    futsalTitleAndContent.remove(title);
+    futsalPostTitle.remove(title);
+  }
+
+  public void changeFutsalWriting(String post,
+                                  String modifiedTitle,
+                                  String modifiedContent) {
+    futsalPostTitle.set(futsalPostTitle.indexOf(post),modifiedTitle);
+    futsalPostTitle.remove(modifiedTitle);
+    futsalTitleAndContent.replace(post, modifiedContent);
   }
 }

@@ -9,7 +9,8 @@ public class BasketballWriteFrame extends JFrame {
   private final JFrame frame;
   private BasketballWritingRepository basketballWritingRepository;
 
-  public BasketballWriteFrame(BasketballWritingRepository basketballWritingRepository) {
+  public BasketballWriteFrame(BasketballWritingRepository
+                                  basketballWritingRepository) {
     this.basketballWritingRepository = basketballWritingRepository;
 
     frame = new JFrame("Are you alone?");
@@ -39,7 +40,8 @@ public class BasketballWriteFrame extends JFrame {
     transmitButton.addActionListener(event -> {
       String basketballTitle = titleBox.getText();
       String basketballContent = contentBox.getText();
-      basketballWritingRepository.getBasketballWriting(basketballTitle, basketballContent);
+      basketballWritingRepository.getBasketballWriting(basketballTitle,
+          basketballContent);
 
       frame.setVisible(false);
     });
