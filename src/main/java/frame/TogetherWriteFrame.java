@@ -1,6 +1,5 @@
 package frame;
 
-import repositories.FutsalWritingRepository;
 import repositories.TogetherWritingRepository;
 
 import javax.swing.*;

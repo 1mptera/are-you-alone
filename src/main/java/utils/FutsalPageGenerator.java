@@ -5,6 +5,7 @@ import frame.FutsalWriteFrame;
 import repositories.FutsalWritingRepository;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +20,7 @@ public class FutsalPageGenerator extends JPanel {
 
   public FutsalPageGenerator(FutsalWritingRepository futsalWritingRepository) {
     this.futsalWritingRepository = futsalWritingRepository;
+    this.setLayout(new BorderLayout());
 
     writeButton = new JButton("글 쓰기");
     writingPost(futsalWritingRepository, writeButton);
@@ -31,9 +33,10 @@ public class FutsalPageGenerator extends JPanel {
     refreshButton = new JButton("새로 고침");
     refresh(futsalWritingRepository, listPanel);
 
-    this.add(listCheck);
-    this.add(refreshButton);
-    this.add(listPanel);
+    this.add((writeButton), BorderLayout.NORTH);
+    this.add((listCheck), BorderLayout.WEST);
+    this.add((refreshButton), BorderLayout.EAST);
+    this.add((listPanel), BorderLayout.SOUTH);
   }
 
   public void listCheck(FutsalWritingRepository futsalWritingRepository
@@ -66,6 +69,14 @@ public class FutsalPageGenerator extends JPanel {
 
       for(String post : futsalWritingRepository.getFutsalPostTitle()) {
         postTitle = new JLabel(post);
+
+        postTitle.addMouseListener(new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            JFrame futsalPostDetailFrame =
+                new FutsalPostDetailFrame(futsalWritingRepository, post);
+          }
+        });
+
         listPanel.add(postTitle);
       }
 
@@ -80,6 +91,5 @@ public class FutsalPageGenerator extends JPanel {
       JFrame futsalWriteFrame =
           new FutsalWriteFrame(futsalWritingRepository);
     });
-    this.add(writeButton);
   }
 }

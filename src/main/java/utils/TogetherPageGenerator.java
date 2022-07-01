@@ -5,6 +5,7 @@ import frame.TogetherWriteFrame;
 import repositories.TogetherWritingRepository;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +21,7 @@ public class TogetherPageGenerator extends JPanel {
   public TogetherPageGenerator
       (TogetherWritingRepository togetherWritingRepository) {
     this.togetherWritingRepository = togetherWritingRepository;
+    this.setLayout(new BorderLayout());
 
     writeButton = new JButton("글 쓰기");
     writingPost(togetherWritingRepository, writeButton);
@@ -32,9 +34,10 @@ public class TogetherPageGenerator extends JPanel {
     refreshButton = new JButton("새로 고침");
     refresh(togetherWritingRepository, listPanel);
 
-    this.add(listCheck);
-    this.add(refreshButton);
-    this.add(listPanel);
+    this.add((writeButton), BorderLayout.NORTH);
+    this.add((listCheck), BorderLayout.WEST);
+    this.add((refreshButton), BorderLayout.EAST);
+    this.add((listPanel), BorderLayout.SOUTH);
   }
 
   public void refresh(TogetherWritingRepository togetherWritingRepository,
@@ -44,8 +47,15 @@ public class TogetherPageGenerator extends JPanel {
 
       for(String post : togetherWritingRepository.getTogetherPostTitle()) {
         postTitle = new JLabel(post);
-        listPanel.add(postTitle);
 
+        postTitle.addMouseListener(new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            JFrame togetherPostDetailFrame =
+                new TogetherPostDetailFrame(togetherWritingRepository, post);
+          }
+        });
+
+        listPanel.add(postTitle);
       }
 
       listPanel.setVisible(false);
@@ -82,7 +92,5 @@ public class TogetherPageGenerator extends JPanel {
       JFrame togetherWriteFrame =
           new TogetherWriteFrame(togetherWritingRepository);
     });
-
-    this.add(writeButton);
   }
 }
