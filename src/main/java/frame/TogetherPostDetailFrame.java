@@ -55,7 +55,6 @@ public class TogetherPostDetailFrame extends JFrame {
     JButton modifyButton = new JButton("수정하기");
     modifyButton.setBounds(530,700,100,40);
     modifyButton.addActionListener(event -> {
-      // 글 수정
       panel.removeAll();
 
       JButton internalModifiyButton = new JButton("수정하기");
@@ -105,7 +104,6 @@ public class TogetherPostDetailFrame extends JFrame {
     JButton deleteButton = new JButton("삭제하기");
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
-      // 글 삭제
       String title = togetherWritingRepository.getTogetherTitleKey(post);
       togetherWritingRepository.deleteTogetherWriting(title);
 

@@ -82,7 +82,7 @@ public class TogetherPageGenerator extends JPanel {
       JFrame togetherWriteFrame =
           new TogetherWriteFrame(togetherWritingRepository);
     });
+
     this.add(writeButton);
   }
-
 }

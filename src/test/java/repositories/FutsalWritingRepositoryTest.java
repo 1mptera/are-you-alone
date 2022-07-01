@@ -41,10 +41,5 @@ class FutsalWritingRepositoryTest {
     futsalWritingRepository.getFutsalWriting("농구", "농구할사람");
 
     futsalWritingRepository.changeFutsalWriting("축구", "야구", "야구할사람");
-//    assertEquals("야구", );
-
-
-//    futsalTitleKey.set(futsalTitleKey.indexOf("축구"), "야구");
-//    assertEquals("야구", futsalWritingRepository.getFutsalPostTitle());
   }
 }
