@@ -8,13 +8,11 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 public class FutsalPageGenerator extends JPanel {
   private final JButton writeButton;
   private final JButton listCheck;
   private final JButton refreshButton;
   private final JPanel listPanel;
-//  private final JComboBox levelBox;
   private FutsalWritingRepository futsalWritingRepository;
 
   private JLabel postTitle;
@@ -33,16 +31,9 @@ public class FutsalPageGenerator extends JPanel {
     refreshButton = new JButton("새로 고침");
     refresh(futsalWritingRepository, listPanel);
 
-    // level 박스
-//    levelBox = new JComboBox<>();
-//    levelBox.setModel(new DefaultComboBoxModel(new String[] {"Level1",
-//    "Level2", "Level3"}));
-
-
     this.add(listCheck);
     this.add(refreshButton);
     this.add(listPanel);
-//    this.add(levelBox);
   }
 
   public void listCheck(FutsalWritingRepository futsalWritingRepository
@@ -69,7 +60,7 @@ public class FutsalPageGenerator extends JPanel {
   }
 
   public void refresh(FutsalWritingRepository futsalWritingRepository,
-                       JPanel listPanel) {
+                      JPanel listPanel) {
     refreshButton.addActionListener(event -> {
       listPanel.removeAll();
 
@@ -82,7 +73,6 @@ public class FutsalPageGenerator extends JPanel {
       listPanel.setVisible(true);
     });
   }
-
 
   public void writingPost(FutsalWritingRepository futsalWritingRepository,
                           JButton writeButton) {

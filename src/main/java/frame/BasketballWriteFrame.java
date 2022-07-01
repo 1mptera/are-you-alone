@@ -1,6 +1,5 @@
 package frame;
 
-
 import repositories.BasketballWritingRepository;
 
 import javax.swing.*;

@@ -19,7 +19,6 @@ public class BasketballPageGenerator extends JPanel {
 
   public BasketballPageGenerator
       (BasketballWritingRepository basketballWritingRepository) {
-//    this.writing = writing;
     this.basketballWritingRepository = basketballWritingRepository;
 
     writeButton = new JButton("글 쓰기");
@@ -39,7 +38,7 @@ public class BasketballPageGenerator extends JPanel {
   }
 
   public void refresh(BasketballWritingRepository basketballWritingRepository,
-                       JPanel listPanel) {
+                      JPanel listPanel) {
     refreshButton.addActionListener(event -> {
       listPanel.removeAll();
 

@@ -103,7 +103,6 @@ public class FutsalPostDetailFrame extends JFrame {
     JButton deleteButton = new JButton("삭제하기");
     deleteButton.setBounds(650,700,100,40);
     deleteButton.addActionListener(event -> {
-      // 글 삭제
       String title = futsalWritingRepository.getFutsalTitleKey(post);
       futsalWritingRepository.deleteFutsalWriting(title);
 
